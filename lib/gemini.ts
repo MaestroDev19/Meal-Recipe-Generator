@@ -49,12 +49,22 @@ export const mealChat = {
       throw new Error("Chat not initialized");
     }
     const response = await this.chat.sendMessage(message);
-    return response.response.text();
+    const responseText = response.response.text();
+
+    this.history.push({ role: "user", parts: [{ text: message }] });
+    this.history.push({ role: "model", parts: [{ text: responseText }] });
+
+    return responseText;
   },
+  resetChat: function(): void {
+      this.history = [];
+      this.initChat(model, config);
+  }
 };
 
+mealChat.initChat(model, config);
+
 export async function chef(message: string): Promise<string> {
-  mealChat.initChat(model, config);
   const response = await mealChat.sendMessage(message);
   return response;
 }
