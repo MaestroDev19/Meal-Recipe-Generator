@@ -37,10 +37,11 @@ interface Chat {
 
 export const mealChat = {
   chat: null as Chat | null,
+  history: [] as Content[],
   initChat: function (model: GenerativeModel, config: Config, chatHistory: Content[] = []): void {
     this.chat = model.startChat({
       generationConfig: config,
-      history: chatHistory,
+      history: this.history,
     });
   },
   sendMessage: async function (message: string): Promise<string> {
