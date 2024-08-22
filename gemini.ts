@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-console.log(apiKey);
 const genAI = new GoogleGenerativeAI(apiKey!);
 
 export const model = genAI.getGenerativeModel({
@@ -26,11 +25,16 @@ export const config: Config = {
 
 export const mealChat = {
   chat: null as any,
-  initChat: function (model: any, config: Config, chatHistory: string[] = []) {
+  history: [] as string[],
+  initChat: function (model: any, config: Config) {
     this.chat = model.startChat({
       generationConfig: config,
-      history: chatHistory,
+      history: this.history,
     });
+  },
+  clearChat: function () {
+    this.history = [];
+    this.initChat(model, config);
   },
   sendMessage: async function (message: string) {
     if (!this.chat) {
