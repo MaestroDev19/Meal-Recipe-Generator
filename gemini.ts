@@ -42,11 +42,7 @@ interface Chat {
 export const mealChat = {
   chat: null as Chat | null,
   history: [] as Content[],
-  initChat: function (
-    model: GenerativeModel,
-    config: Config,
-    chatHistory: Content[] = []
-  ): void {
+  initChat: function (model: GenerativeModel, config: Config): void {
     this.chat = model.startChat({
       generationConfig: config,
       history: this.history,
