@@ -1,5 +1,5 @@
 "use client";
-import { chef } from "@/lib/gemini";
+import { chef } from "@/gemini";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { z } from "zod";
