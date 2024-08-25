@@ -276,7 +276,7 @@ export default function Dashboard() {
             Share
           </Button>
         </header>
-        <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
+        <main className="grid flex-1 gap-4 overflow-hidden p-4 md:grid-cols-2 lg:grid-cols-3">
           <div className="relative hidden flex-col items-start gap-8 md:flex lg:col-span-1">
             <form className="grid w-full items-start gap-6">
               <fieldset className="grid gap-6 rounded-lg border p-4">
@@ -434,42 +434,44 @@ export default function Dashboard() {
                   input.value = "";
                 }
               }}
-              className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
+              className="relative mt-auto"
             >
-              <Label htmlFor="message" className="sr-only">
-                Message
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Type name of dish and click 'Generate Recipe' to use the form data..."
-                className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
-              />
-              <div className="flex items-center p-3 pt-0">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Paperclip className="size-4" />
-                        <span className="sr-only">Attach file</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">Attach File</TooltipContent>
-                  </Tooltip>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Mic className="size-4" />
-                        <span className="sr-only">Use Microphone</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">Use Microphone</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <Button type="submit" size="sm" className="ml-auto gap-1.5">
-                  Generate Recipe
-                  <CornerDownLeft className="size-3.5" />
-                </Button>
+              <div className="overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring">
+                <Label htmlFor="message" className="sr-only">
+                  Message
+                </Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Type name of dish and click 'Generate Recipe' to use the form data..."
+                  className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+                />
+                <div className="flex items-center p-3 pt-0">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <Paperclip className="size-4" />
+                          <span className="sr-only">Attach file</span>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">Attach File</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <Mic className="size-4" />
+                          <span className="sr-only">Use Microphone</span>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">Use Microphone</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <Button type="submit" size="sm" className="ml-auto gap-1.5">
+                    Generate Recipe
+                    <CornerDownLeft className="size-3.5" />
+                  </Button>
+                </div>
               </div>
             </form>
           </div>
