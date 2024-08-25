@@ -148,107 +148,120 @@ export default function Dashboard() {
               <DrawerHeader>
                 <DrawerTitle>Configuration</DrawerTitle>
                 <DrawerDescription>
-                  Configure the settings for the model and messages.
+                  Configure the settings for the recipe generation.
                 </DrawerDescription>
               </DrawerHeader>
               <form className="grid w-full items-start gap-6 overflow-auto p-4 pt-0">
                 <fieldset className="grid gap-6 rounded-lg border p-4">
-                  <legend className="-ml-1 px-1 text-sm font-medium"></legend>
+                  <legend className="-ml-1 px-1 text-sm font-medium">
+                    Recipe Configuration
+                  </legend>
                   <div className="grid gap-3">
-                    <Label htmlFor="model">Model</Label>
-                    <Select>
-                      <SelectTrigger
-                        id="model"
-                        className="items-start [&_[data-description]]:hidden"
-                      >
-                        <SelectValue placeholder="Select a Cusine style" />
+                    <Label htmlFor="cuisineStyle">Cuisine Style</Label>
+                    <Select
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          cuisineStyle: value,
+                        }))
+                      }
+                    >
+                      <SelectTrigger id="cuisineStyle" className="items-start">
+                        <SelectValue placeholder="Select a cuisine style" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="genesis">
-                          <div className="flex items-start gap-3 text-muted-foreground">
-                            <Rabbit className="size-5" />
-                            <div className="grid gap-0.5">
-                              <p>
-                                Neural{" "}
-                                <span className="font-medium text-foreground">
-                                  Canadian cuisine
-                                </span>
-                              </p>
-                              <p className="text-xs" data-description>
-                                Our fastest model for general use cases.
-                              </p>
-                            </div>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="explorer">
-                          <div className="flex items-start gap-3 text-muted-foreground">
-                            <Bird className="size-5" />
-                            <div className="grid gap-0.5">
-                              <p>
-                                Neural{" "}
-                                <span className="font-medium text-foreground">
-                                  Explorer
-                                </span>
-                              </p>
-                              <p className="text-xs" data-description>
-                                Performance and speed for efficiency.
-                              </p>
-                            </div>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="quantum">
-                          <div className="flex items-start gap-3 text-muted-foreground">
-                            <Turtle className="size-5" />
-                            <div className="grid gap-0.5">
-                              <p>
-                                Neural{" "}
-                                <span className="font-medium text-foreground">
-                                  Quantum
-                                </span>
-                              </p>
-                              <p className="text-xs" data-description>
-                                The most powerful model for complex
-                                computations.
-                              </p>
-                            </div>
-                          </div>
-                        </SelectItem>
+                        {cuisineStyles.map((style) => (
+                          <SelectItem key={style} value={style}>
+                            {style}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="grid gap-3">
-                    <Label htmlFor="temperature">Temperature</Label>
-                    <Input id="temperature" type="number" placeholder="0.4" />
+                    <Label htmlFor="dishType">Dish Type</Label>
+                    <Select
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({ ...prev, dishType: value }))
+                      }
+                    >
+                      <SelectTrigger id="dishType" className="items-start">
+                        <SelectValue placeholder="Select a dish type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="appetizer">Appetizer</SelectItem>
+                        <SelectItem value="main">Main Course</SelectItem>
+                        <SelectItem value="dessert">Dessert</SelectItem>
+                        <SelectItem value="snack">Snack</SelectItem>
+                        <SelectItem value="drink">Drink</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="grid gap-3">
-                    <Label htmlFor="top-p">Top P</Label>
-                    <Input id="top-p" type="number" placeholder="0.7" />
+                    <Label htmlFor="timeOfDay">Time of Day</Label>
+                    <Select
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({ ...prev, timeOfDay: value }))
+                      }
+                    >
+                      <SelectTrigger id="timeOfDay" className="items-start">
+                        <SelectValue placeholder="Select a time of day" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="morning">Morning</SelectItem>
+                        <SelectItem value="afternoon">Afternoon</SelectItem>
+                        <SelectItem value="evening">Evening</SelectItem>
+                        <SelectItem value="anytime">Anytime</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="grid gap-3">
-                    <Label htmlFor="top-k">Top K</Label>
-                    <Input id="top-k" type="number" placeholder="0.0" />
+                    <Label htmlFor="dietaryRestrictions">
+                      Dietary Restrictions
+                    </Label>
+                    <Select
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          dietaryRestrictions: value,
+                        }))
+                      }
+                    >
+                      <SelectTrigger
+                        id="dietaryRestrictions"
+                        className="items-start"
+                      >
+                        <SelectValue placeholder="Select dietary restrictions" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="none">None</SelectItem>
+                        <SelectItem value="vegetarian">Vegetarian</SelectItem>
+                        <SelectItem value="vegan">Vegan</SelectItem>
+                        <SelectItem value="gluten-free">Gluten-free</SelectItem>
+                        <SelectItem value="dairy-free">Dairy-free</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </fieldset>
                 <fieldset className="grid gap-6 rounded-lg border p-4">
                   <legend className="-ml-1 px-1 text-sm font-medium">
-                    Messages
+                    Additional Information
                   </legend>
                   <div className="grid gap-3">
-                    <Label htmlFor="role">Role</Label>
-                    <Select defaultValue="system">
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a role" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="system">System</SelectItem>
-                        <SelectItem value="user">User</SelectItem>
-                        <SelectItem value="assistant">Assistant</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-3">
-                    <Label htmlFor="content">Content</Label>
-                    <Textarea id="content" placeholder="You are a..." />
+                    <Label htmlFor="additionalData">
+                      Special Requirements or Preferences
+                    </Label>
+                    <Textarea
+                      id="additionalData"
+                      placeholder="Enter any additional information, such as specific ingredients, cooking methods, or personal preferences..."
+                      className="min-h-[150px]"
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          additionalData: e.target.value,
+                        }))
+                      }
+                    />
                   </div>
                 </fieldset>
               </form>
