@@ -4,15 +4,15 @@ import { chef } from "@/gemini";
 import { useState } from "react";
 import { PreferencesForm } from "@/components/preferences";
 export interface Preferences {
-  dietaryPreferences: string[];
-  allergies: string[];
+  dietaryPreferences: string;
+  allergies: string;
   skillLevel: string;
   servingSize: string;
 }
 export default function Page() {
   const [preferences, setPreferences] = useState<Preferences>({
-    dietaryPreferences: [],
-    allergies: [],
+    dietaryPreferences: "",
+    allergies: "",
     skillLevel: "",
     servingSize: "",
   });
@@ -32,14 +32,12 @@ export default function Page() {
           if (Object.values(preferences).some((pref) => pref.length > 0)) {
             prompt = `Recipe request: ${input}\n\nPreferences:`;
             if (preferences.dietaryPreferences.length > 0) {
-              prompt += `\nDietary: ${preferences.dietaryPreferences.join(
-                ", "
-              )}`;
+              prompt += `\nDietary: ${preferences.dietaryPreferences}`;
             }
             if (preferences.allergies.length > 0) {
-              prompt += `\nAllergies: ${preferences.allergies.join(", ")}`;
+              prompt += `\nAllergies: ${preferences.allergies}`;
             }
-            if (preferences.skillLevel) {
+            if (preferences.skillLevel.length > 0) {
               prompt += `\nSkill Level: ${preferences.skillLevel}`;
             }
             if (preferences.servingSize) {
