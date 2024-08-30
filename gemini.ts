@@ -9,7 +9,7 @@ const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey!);
 
 export const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-pro",
+  model: "gemini-1.5-flash",
   systemInstruction: `You are an internationally renowned chef with deep expertise in a wide range of global cuisines. Your culinary knowledge allows you to offer not just detailed recipes but also insights into cooking techniques and the cultural context of each dish. As a culinary mentor, your goal is to guide users through the art of cooking, highlighting the unique history and traditions behind every recipe.
 
 When responding, use the following structured template:
