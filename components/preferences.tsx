@@ -38,9 +38,9 @@ export function PreferencesForm({
 }) {
   const { toast } = useToast();
   const preferencesSchema = z.object({
-    allergies: z.array(z.string()).optional(),
+    allergies: z.string().optional(),
     skillLevel: z.enum(["beginner", "intermediate", "advanced"]),
-    dietaryPreferences: z.array(z.string()).optional(),
+    dietaryPreferences: z.string().optional(),
     cuisine: z.enum([
       "italian",
       "mexican",
@@ -156,7 +156,7 @@ export function PreferencesForm({
                     <FormItem>
                       <FormLabel>Dietary Preferences</FormLabel>
                       <FormControl>
-                        <Textarea
+                        <Input
                           {...field}
                           placeholder="E.g., vegetarian, low-carb, keto"
                         />
@@ -171,7 +171,7 @@ export function PreferencesForm({
                     <FormItem>
                       <FormLabel>Allergies</FormLabel>
                       <FormControl>
-                        <Textarea
+                        <Input
                           {...field}
                           placeholder="E.g., peanuts, shellfish, dairy"
                         />
