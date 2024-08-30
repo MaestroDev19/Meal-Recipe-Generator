@@ -10,9 +10,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { Paperclip, Mic, CornerDownLeft, Cog, Loader2 } from "lucide-react";
+import {
+  Paperclip,
+  Mic,
+  CornerDownLeft,
+  Cog,
+  Loader2,
+  Eraser,
+} from "lucide-react";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormField, FormItem, FormControl, Form } from "./ui/form";
+import { mealChat } from "@/gemini";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ReactMarkdown from "react-markdown";
@@ -125,12 +133,18 @@ export default function ChatInterface({
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <Paperclip className="size-4" />
-                      <span className="sr-only">Attach file</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        mealChat.resetChat();
+                      }}
+                    >
+                      <Eraser className="size-4" />
+                      <span className="sr-only">Clear Chat</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent side="top">Attach File</TooltipContent>
+                  <TooltipContent side="top">Clear Chat</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
