@@ -66,6 +66,7 @@ export default function ChatInterface({
       ]);
     } finally {
       setIsSubmitting(false);
+      methods.reset();
     }
   };
 
