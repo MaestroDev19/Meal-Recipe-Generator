@@ -39,9 +39,9 @@ export function PreferencesForm({
   const { toast } = useToast();
   const preferencesSchema = z.object({
     allergies: z.string().optional(),
-    skillLevel: z.enum(["beginner", "intermediate", "advanced"]),
+    skillLevel: z.enum(["beginner", "intermediate", "advanced"]).optional(),
     dietaryPreferences: z.string().optional(),
-    servingSize: z.enum(["single", "couple", "family", "party"]),
+    servingSize: z.enum(["single", "couple", "family", "party"]).optional(),
   });
   const form = useForm<Preferences>({
     resolver: zodResolver(preferencesSchema),
