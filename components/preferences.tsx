@@ -41,20 +41,7 @@ export function PreferencesForm({
     allergies: z.string().optional(),
     skillLevel: z.enum(["beginner", "intermediate", "advanced"]),
     dietaryPreferences: z.string().optional(),
-    cuisine: z.enum([
-      "italian",
-      "mexican",
-      "french",
-      "japanese",
-      "korean",
-      "chinese",
-      "thai",
-      "vietnamese",
-      "indian",
-      "brazilian",
-      "american",
-      "nigerian",
-    ]),
+    servingSize: z.enum(["single", "couple", "family", "party"]),
   });
   const form = useForm<Preferences>({
     resolver: zodResolver(preferencesSchema),
@@ -116,33 +103,31 @@ export function PreferencesForm({
                 />
                 <FormField
                   control={form.control}
-                  name="cuisine"
+                  name="servingSize"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Preferred Cuisine</FormLabel>
+                      <FormLabel>Preferred Serving Size</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder="Select a cuisine" />
+                            <SelectValue placeholder="Select serving size" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="italian">Italian</SelectItem>
-                            <SelectItem value="mexican">Mexican</SelectItem>
-                            <SelectItem value="french">French</SelectItem>
-                            <SelectItem value="japanese">Japanese</SelectItem>
-                            <SelectItem value="korean">Korean</SelectItem>
-                            <SelectItem value="chinese">Chinese</SelectItem>
-                            <SelectItem value="thai">Thai</SelectItem>
-                            <SelectItem value="vietnamese">
-                              Vietnamese
+                            <SelectItem value="single">
+                              Single (1-2 servings)
                             </SelectItem>
-                            <SelectItem value="indian">Indian</SelectItem>
-                            <SelectItem value="brazilian">Brazilian</SelectItem>
-                            <SelectItem value="american">American</SelectItem>
-                            <SelectItem value="nigerian">Nigerian</SelectItem>
+                            <SelectItem value="couple">
+                              Couple (3-4 servings)
+                            </SelectItem>
+                            <SelectItem value="family">
+                              Family (5-6 servings)
+                            </SelectItem>
+                            <SelectItem value="party">
+                              Party (7+ servings)
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>

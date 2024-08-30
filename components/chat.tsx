@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { Paperclip, Mic, CornerDownLeft, Cog } from "lucide-react";
+import { Paperclip, Mic, CornerDownLeft, Cog, Loader2 } from "lucide-react";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormField, FormItem, FormControl, Form } from "./ui/form";
 import { z } from "zod";
@@ -35,6 +35,7 @@ export default function ChatInterface({
   preferences: Preferences;
   onPreferencesChange: (preferences: Preferences) => void;
 }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [messages, setMessages] = useState<
     Array<{ text: string; isUser: boolean }>
   >([]);
@@ -48,16 +49,24 @@ export default function ChatInterface({
   });
 
   const onSubmit = async (values: FormValues) => {
-    const { message } = values;
-    setMessages([...messages, { text: message, isUser: true }]);
+    setIsSubmitting(true);
+    try {
+      const { message } = values;
+      setMessages((prev) => [...prev, { text: message, isUser: true }]);
 
-    const aiResponse = await onRecipeSearch(message);
-    methods.reset();
+      const aiResponse = await onRecipeSearch(message);
+      methods.reset();
 
-    // Simulate AI response
-    setTimeout(() => {
       setMessages((prev) => [...prev, { text: aiResponse, isUser: false }]);
-    }, 1000);
+    } catch (err: unknown) {
+      console.error("Error submitting message:", err);
+      setMessages((prev) => [
+        ...prev,
+        { text: "Sorry, an error occurred. Please try again.", isUser: false },
+      ]);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -132,8 +141,22 @@ export default function ChatInterface({
                   <TooltipContent side="top">Preferences</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              <Button type="submit" size="sm" className="ml-auto gap-1.5">
-                Send Message
+
+              <Button
+                type="submit"
+                size="sm"
+                className="ml-auto gap-1.5"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <span>Relax let me cook...</span>
+                  </div>
+                ) : (
+                  "Send Message"
+                )}
+
                 <CornerDownLeft className="size-3.5" />
               </Button>
             </div>

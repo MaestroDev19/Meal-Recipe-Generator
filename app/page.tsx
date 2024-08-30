@@ -7,14 +7,14 @@ export interface Preferences {
   dietaryPreferences: string[];
   allergies: string[];
   skillLevel: string;
-  cuisine: string;
+  servingSize: string;
 }
 export default function Page() {
   const [preferences, setPreferences] = useState<Preferences>({
     dietaryPreferences: [],
     allergies: [],
     skillLevel: "",
-    cuisine: "",
+    servingSize: "",
   });
 
   const handlePreferencesChange = (newPreferences: Preferences) => {
@@ -42,8 +42,8 @@ export default function Page() {
             if (preferences.skillLevel) {
               prompt += `\nSkill Level: ${preferences.skillLevel}`;
             }
-            if (preferences.cuisine) {
-              prompt += `\nCuisine: ${preferences.cuisine}`;
+            if (preferences.servingSize) {
+              prompt += `\nServing Size: ${preferences.servingSize}`;
             }
           }
 
