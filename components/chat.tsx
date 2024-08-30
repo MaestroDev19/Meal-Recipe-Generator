@@ -137,6 +137,7 @@ export default function ChatInterface({
                       variant="ghost"
                       size="icon"
                       onClick={() => {
+                        setMessages([]);
                         mealChat.resetChat();
                       }}
                     >
