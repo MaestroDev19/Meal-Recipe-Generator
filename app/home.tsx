@@ -13,23 +13,21 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Download, Settings } from "lucide-react";
+import {Settings } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 import Markdown from 'react-markdown'
-import { Select, SelectContent, SelectValue, SelectTrigger, SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
+import { Select, SelectContent, SelectValue, SelectTrigger, SelectGroup, SelectItem } from "@/components/ui/select";
 
 
 interface MyChoice{
@@ -71,7 +69,7 @@ export function Home({recipe,choice,handleChoice}:{recipe:(choice:MyChoice,userP
   const [messages,setMessages] = useState<Message[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isLoading,setIsLoading] = useState(false);
-  const [canExportPDF, setCanExportPDF] = useState(false);
+
   
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
