@@ -23,14 +23,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { useMediaQuery } from '@custom-react-hooks/use-media-query'
+
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Download, Settings } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 import Markdown from 'react-markdown'
 import { Select, SelectContent, SelectValue, SelectTrigger, SelectLabel, SelectGroup, SelectItem } from "@/components/ui/select";
-import { jsPDF } from "jspdf"; // Import jsPDF
+
 
 interface MyChoice{
   mode:'Fitness' | 'Vegan' | 'Normal',
@@ -67,28 +67,7 @@ export function Chat() {
 
 
 export function Home({recipe,choice,handleChoice}:{recipe:(choice:MyChoice,userPrompt:string)=>Promise<string>,choice:MyChoice,handleChoice:(newChoice:MyChoice)=>void}){
-  function isRecipeMessage(message: string): boolean {
-    const recipeKeywords = [
-      'recipe', 'ingredients', 'instructions', 'cooking', 
-      'preparation', 'method', 'steps', 'bake', 'cook', 
-      'roast', 'grill', 'fry', 'simmer', 'boil', 'saute', 
-      'steam', 'broil', 'blend', 'chop', 'dice', 'mix', 
-      'whisk', 'stir', 'marinate', 'season', 'garnish', 
-      'peel', 'slice', 'measure', 'knead', 'serve', 
-      'plating', 'dish', 'meal', 'snack', 'appetizer', 
-      'dessert', 'entree', 'main course', 'side dish', 
-      'baking', 'cuisine', 'flavor', 'taste', 'portion', 
-      'temperature', 'oven', 'skillet', 'pan', 'microwave', 
-      'pressure cooker', 'instant pot', 'slow cooker', 
-      'stove', 'griddle', 'spices', 'herbs', 'sauce', 
-      'dressing', 'rub', 'glaze', 'batter', 'dough', 
-      'topping', 'crumbs', 'pastry', 'filling', 'stuffing'
-    ];
-    return recipeKeywords.some(keyword => 
-      message.toLowerCase().includes(keyword)
-    ) || message.toLowerCase().includes('download');
-  }
-
+ 
   const [messages,setMessages] = useState<Message[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isLoading,setIsLoading] = useState(false);
