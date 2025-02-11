@@ -2,7 +2,7 @@ import { Groq } from "groq-sdk";
 const apiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY;
 
 const groq = new Groq({
-  apiKey: apiKey!,dangerouslyAllowBrowser: true
+  apiKey: apiKey!,dangerouslyAllowBrowser: true,"model": "llama-3.3-70b-versatile",
 });
 
 
